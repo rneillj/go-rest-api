@@ -1,4 +1,4 @@
-package main
+package handlers
 
 import (
     "net/http"
@@ -25,7 +25,6 @@ func testHandler(w http.ResponseWriter, r *http.Request) {
     }
 }
 
-func main() {
+func InitHandlers() {
     http.HandleFunc("/test", testHandler)
-    http.ListenAndServe(":8080", nil)
 }
