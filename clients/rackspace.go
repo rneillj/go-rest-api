@@ -1,33 +1,26 @@
 package rackspace
 
 import (
-    "fmt"
+    "log"
 
     "github.com/censhin/go-rest-api/util"
-
-    //"github.com/rackspace/gophercloud"
+    "github.com/rackspace/gophercloud"
+    "github.com/rackspace/gophercloud/rackspace"
 )
 
-type Config struct {
-}
-
-func GetClient() /*(*gophercloud.ProviderClient, error)*/ {
-    config := config.GetConfig()
-    auth_conf := config["auth"]
-    fmt.Println(auth_conf)
-    /*
+func GetClient() *gophercloud.ProviderClient {
+    rack_creds := config.GetConfig().Auth.Rackspace
     options := gophercloud.AuthOptions {
-        Username: config["auth"]["rackspace"]["username"],
-        APIKey: config["auth"]["rackspace"]["apiKey"],
-        IdentityEndpoint: config["auth"]["rackspace"]["endpoint"],
+        Username: rack_creds.Username,
+        APIKey: rack_creds.ApiKey,
+        IdentityEndpoint: rack_creds.Endpoint,
     }
 
-    client, err := gophercloud.AuthenticatedClient(options)
+    client, err := rackspace.AuthenticatedClient(options)
 
     if err != nil {
-        return nil, err
-    } else {
-        return client, nil
+        log.Fatal(err)
     }
-    */
+
+    return client
 }

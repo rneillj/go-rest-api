@@ -16,9 +16,8 @@ type Config struct {
     }
 }
 
-func GetConfig() (map[string]interface{}) {
-    //c := &Config{}
-    config := make(map[string]interface{})
+func GetConfig() *Config {
+    config := &Config{}
 
     file, err := ioutil.ReadFile("config/config.json")
     if err != nil {
@@ -29,8 +28,6 @@ func GetConfig() (map[string]interface{}) {
     if err != nil {
         log.Fatal(err)
     }
-
-    //config["auth"] = *c
 
     return config
 }

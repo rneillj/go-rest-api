@@ -1,3 +1,5 @@
 # config file
-
 config/config.json
+
+# misc files
+*.swp
