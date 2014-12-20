@@ -8,22 +8,24 @@ import (
 )
 
 func testHandler(w http.ResponseWriter, r *http.Request) {
-    b, err := controllers.TestController()
+    res, err := controllers.TestController()
 
     if err != nil {
         log.Fatal(err)
     } else {
-        w.Write(b)
+        w.Header().Set("Content-Type", "application/json")
+        w.Write(res)
     }
 }
 
 func novaListHandler(w http.ResponseWriter, r *http.Request) {
-    b, err := controllers.NovaListController()
+    res, err := controllers.NovaListController()
 
     if err != nil {
         log.Fatal(err)
     } else {
-        w.Write(b)
+        w.Header().Set("Content-Type", "application/json")
+        w.Write(res)
     }
 }
 

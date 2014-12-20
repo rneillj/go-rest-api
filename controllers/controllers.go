@@ -10,19 +10,14 @@ import (
     rs "github.com/rackspace/gophercloud/rackspace/compute/v2/servers"
 )
 
-type TestJson struct {
-    Message string
-}
-
 func TestController() ([]byte, error) {
-    t := &TestJson{"test"}
     body := make(map[string]interface{})
 
-    body["msg"] = t.Message
+    body["msg"] = "test"
 
-    b, err := json.Marshal(body)
+    res, err := json.Marshal(body)
 
-    return b, err
+    return res, err
 }
 
 func NovaListController() ([]byte, error) {
