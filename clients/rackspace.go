@@ -4,6 +4,7 @@ import (
     "log"
 
     "github.com/censhin/go-rest-api/util"
+
     "github.com/rackspace/gophercloud"
     "github.com/rackspace/gophercloud/rackspace"
 )

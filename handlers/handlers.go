@@ -19,14 +19,10 @@ func testHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func novaListHandler(w http.ResponseWriter, r *http.Request) {
-    res, err := controllers.NovaListController()
+    res := controllers.NovaListController()
 
-    if err != nil {
-        log.Fatal(err)
-    } else {
-        w.Header().Set("Content-Type", "application/json")
-        w.Write(res)
-    }
+    w.Header().Set("Content-Type", "application/json")
+    w.Write(res)
 }
 
 func InitHandlers() {

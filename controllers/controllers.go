@@ -5,6 +5,7 @@ import (
     "log"
 
     "github.com/censhin/go-rest-api/resources"
+    "github.com/censhin/go-rest-api/util/cache"
 )
 
 func TestController() ([]byte, error) {
@@ -17,17 +18,27 @@ func TestController() ([]byte, error) {
     return res, err
 }
 
-func NovaListController() ([]byte, error) {
+func NovaListController() ([]byte) {
     body := make(map[string]interface{})
 
-    list, err := resources.NovaListResource()
+    res, err := cache.GetValue("listServers")
     if err != nil {
-        log.Fatal(err)
-    } else {
+        list, err := resources.NovaListResource()
+        if err != nil {
+           log.Fatal(err)
+        }
+
         body["servers"] = list
+
+        res, err := json.Marshal(body)
+        if err != nil {
+            log.Fatal(err)
+        }
+
+        cache.CacheValue(res, "listServers")
+
+        return res
+    } else {
+        return res
     }
-
-    res, err := json.Marshal(body)
-
-    return res, err
 }
