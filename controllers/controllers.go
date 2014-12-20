@@ -7,7 +7,7 @@ import (
     "github.com/censhin/go-rest-api/clients"
     "github.com/rackspace/gophercloud/pagination"
     os "github.com/rackspace/gophercloud/openstack/compute/v2/servers"
-    "github.com/rackspace/gophercloud/rackspace/compute/v2/servers"
+    rs "github.com/rackspace/gophercloud/rackspace/compute/v2/servers"
 )
 
 type TestJson struct {
@@ -27,12 +27,12 @@ func TestController() ([]byte, error) {
 
 func NovaListController() ([]byte, error) {
     client := rackspace.GetClient()
-    pager := servers.List(client, nil)
+    pager := rs.List(client, nil)
     data := []os.Server{}
     novaResponse := make(map[string]interface{})
 
     err := pager.EachPage(func(page pagination.Page) (bool, error) {
-        serverList, err := servers.ExtractServers(page)
+        serverList, err := rs.ExtractServers(page)
         if err != nil {
             return false, err
         }
