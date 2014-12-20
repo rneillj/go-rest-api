@@ -1,0 +1,9 @@
+{
+    "auth": {
+        "rackspace": {
+            "username": null,
+            "apiKey": null,
+            "endpoint": null
+        }
+    }
+}
