@@ -2,9 +2,11 @@ package controllers
 
 import (
     "encoding/json"
+    "log"
 
     "github.com/censhin/go-rest-api/clients"
     "github.com/rackspace/gophercloud/pagination"
+    os "github.com/rackspace/gophercloud/openstack/compute/v2/servers"
     "github.com/rackspace/gophercloud/rackspace/compute/v2/servers"
 )
 
@@ -25,19 +27,29 @@ func TestController() ([]byte, error) {
 
 func NovaListController() ([]byte, error) {
     client := rackspace.GetClient()
-
     pager := servers.List(client, nil)
-
-    m := make(map[string][]map[string]interface{})
+    data := []os.Server{}
+    novaResponse := make(map[string]interface{})
 
     err := pager.EachPage(func(page pagination.Page) (bool, error) {
         serverList, err := servers.ExtractServers(page)
+        if err != nil {
+            return false, err
+        }
 
         for _, s := range serverList {
-            m = append(m, s)
+            data = append(data, s)
         }
-        return true, err
+        return true, nil
     })
 
-    return nil, err
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    novaResponse["servers"] = data
+
+    res, err := json.Marshal(novaResponse)
+
+    return res, err
 }
