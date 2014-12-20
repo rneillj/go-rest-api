@@ -3,3 +3,6 @@ config/config.json
 
 # misc files
 *.swp
+
+# service bin
+server

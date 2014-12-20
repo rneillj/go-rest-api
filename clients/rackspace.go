@@ -8,13 +8,13 @@ import (
     "github.com/rackspace/gophercloud/rackspace"
 )
 
-func GetClient() *gophercloud.ServiceClient {
-    rack_creds := config.GetConfig().Auth.Rackspace
+func BuildClient() *gophercloud.ServiceClient {
+    creds := config.GetConfig().Auth.Rackspace
 
     options := gophercloud.AuthOptions {
-        Username: rack_creds.Username,
-        APIKey: rack_creds.ApiKey,
-        IdentityEndpoint: rack_creds.Endpoint,
+        Username: creds.Username,
+        APIKey: creds.ApiKey,
+        IdentityEndpoint: creds.Endpoint,
     }
 
     provider, err := rackspace.AuthenticatedClient(options)

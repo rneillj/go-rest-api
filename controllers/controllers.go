@@ -21,7 +21,7 @@ func TestController() ([]byte, error) {
 }
 
 func NovaListController() ([]byte, error) {
-    client := rackspace.GetClient()
+    client := rackspace.BuildClient()
     pager := rs.List(client, nil)
     data := []os.Server{}
     novaResponse := make(map[string]interface{})
